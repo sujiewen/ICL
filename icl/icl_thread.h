@@ -29,20 +29,20 @@ namespace icl
 {
 
 ///////////////////////////////////////////////////////////////////////////////
-/* ËµÃ÷
+/* è¯´æ˜
 
-Ò»¡¢Win32Æ½Ì¨ÏÂºÍLinuxÆ½Ì¨ÏÂÏß³ÌµÄÖ÷ÒªÇø±ğ:
+ä¸€ã€Win32å¹³å°ä¸‹å’ŒLinuxå¹³å°ä¸‹çº¿ç¨‹çš„ä¸»è¦åŒºåˆ«:
 
-    1. Win32Ïß³ÌÓµÓĞHandleºÍThreadId£¬¶øLinuxÏß³ÌÖ»ÓĞThreadId¡£
-    2. Win32Ïß³ÌÖ»ÓĞThreadPriority£¬¶øLinuxÏß³ÌÓĞThreadPolicyºÍThreadPriority¡£
-    3. Win32Ïß³ÌÔÚÇ¿ĞĞÉ±ËÀÊ±£¬Ïß³ÌÖ´ĞĞ¹ı³ÌÖĞµÄÕ»¶ÔÏó²»»áÎö¹¹£¬¶øLinuxÏß³ÌÔò»á¡£
+    1. Win32çº¿ç¨‹æ‹¥æœ‰Handleå’ŒThreadIdï¼Œè€ŒLinuxçº¿ç¨‹åªæœ‰ThreadIdã€‚
+    2. Win32çº¿ç¨‹åªæœ‰ThreadPriorityï¼Œè€ŒLinuxçº¿ç¨‹æœ‰ThreadPolicyå’ŒThreadPriorityã€‚
+    3. Win32çº¿ç¨‹åœ¨å¼ºè¡Œæ€æ­»æ—¶ï¼Œçº¿ç¨‹æ‰§è¡Œè¿‡ç¨‹ä¸­çš„æ ˆå¯¹è±¡ä¸ä¼šææ„ï¼Œè€ŒLinuxçº¿ç¨‹åˆ™ä¼šã€‚
 
 */
 ///////////////////////////////////////////////////////////////////////////////
-// ÀàĞÍ¶¨Òå
+// ç±»å‹å®šä¹‰
 
 #ifdef ICL_WIN32
-// Ïß³ÌÓÅÏÈ¼¶
+// çº¿ç¨‹ä¼˜å…ˆçº§
 enum {
     THREAD_PRI_IDLE         = 0,
     THREAD_PRI_LOWEST       = 1,
@@ -54,14 +54,14 @@ enum {
 #endif
 
 #ifdef ICL_LINUX
-// Ïß³Ìµ÷¶È²ßÂÔ
+// çº¿ç¨‹è°ƒåº¦ç­–ç•¥
 enum {
     THREAD_POL_DEFAULT      = SCHED_OTHER,
     THREAD_POL_RR           = SCHED_RR,
     THREAD_POL_FIFO         = SCHED_FIFO
 };
 
-// Ïß³ÌÓÅÏÈ¼¶
+// çº¿ç¨‹ä¼˜å…ˆçº§
 enum {
     THREAD_PRI_DEFAULT     = 0,
     THREAD_PRI_MIN         = 0,
@@ -71,20 +71,20 @@ enum {
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CThreadImpl - Æ½Ì¨Ïß³ÌÊµÏÖ»ùÀà
+// class CThreadImpl - å¹³å°çº¿ç¨‹å®ç°åŸºç±»
 
 class CThreadImpl
 {
 friend class CThread;
 
 protected:
-    CThread& m_Thread;              // Ïà¹ØÁªµÄ CThread ¶ÔÏó
-    int m_nThreadId;                // Ïß³ÌID
-    bool m_bFinished;               // Ïß³ÌÊÇ·ñÒÑÍê³ÉÁËÏß³Ìº¯ÊıµÄÖ´ĞĞ
-    int m_nTermElapsedSecs;         // ´Óµ÷ÓÃ Terminate µ½µ±Ç°¹²¾­¹ı¶àÉÙÊ±¼ä(Ãë)
-    bool m_bFreeOnTerminate;        // Ïß³ÌÍË³öÊ±ÊÇ·ñÍ¬Ê±ÊÍ·ÅÀà¶ÔÏó
-    bool m_bTerminated;             // ÊÇ·ñÓ¦ÍË³öµÄ±êÖ¾
-    int m_nReturnValue;             // Ïß³Ì·µ»ØÖµ (¿ÉÔÚ Execute º¯ÊıÖĞĞŞ¸Ä´ËÖµ£¬º¯Êı WaitFor ·µ»Ø´ËÖµ)
+    CThread& m_Thread;              // ç›¸å…³è”çš„ CThread å¯¹è±¡
+    int m_nThreadId;                // çº¿ç¨‹ID
+    bool m_bFinished;               // çº¿ç¨‹æ˜¯å¦å·²å®Œæˆäº†çº¿ç¨‹å‡½æ•°çš„æ‰§è¡Œ
+    int m_nTermElapsedSecs;         // ä»è°ƒç”¨ Terminate åˆ°å½“å‰å…±ç»è¿‡å¤šå°‘æ—¶é—´(ç§’)
+    bool m_bFreeOnTerminate;        // çº¿ç¨‹é€€å‡ºæ—¶æ˜¯å¦åŒæ—¶é‡Šæ”¾ç±»å¯¹è±¡
+    bool m_bTerminated;             // æ˜¯å¦åº”é€€å‡ºçš„æ ‡å¿—
+    int m_nReturnValue;             // çº¿ç¨‹è¿”å›å€¼ (å¯åœ¨ Execute å‡½æ•°ä¸­ä¿®æ”¹æ­¤å€¼ï¼Œå‡½æ•° WaitFor è¿”å›æ­¤å€¼)
 
 protected:
     void Execute();
@@ -102,14 +102,14 @@ public:
     virtual int WaitFor() = 0;
     virtual void Sleep(double fSeconds) = 0;
 
-    // ÊôĞÔ (getter)
+    // å±æ€§ (getter)
     CThread* GetThread() { return (CThread*)&m_Thread; }
     int GetThreadId() const { return m_nThreadId; }
     int GetTerminated() const { return m_bTerminated; }
     int GetReturnValue() const { return m_nReturnValue; }
     bool GetFreeOnTerminate() const { return m_bFreeOnTerminate; }
     int GetTermElapsedSecs() const;
-    // ÊôĞÔ (setter)
+    // å±æ€§ (setter)
     void SetThreadId(int nValue) { m_nThreadId = nValue; }
     void SetFinished(bool bValue) { m_bFinished = bValue; }
     void SetTerminated(bool bValue);
@@ -118,7 +118,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CWin32ThreadImpl - Win32Æ½Ì¨Ïß³ÌÊµÏÖÀà
+// class CWin32ThreadImpl - Win32å¹³å°çº¿ç¨‹å®ç°ç±»
 
 #ifdef ICL_WIN32
 class CWin32ThreadImpl : public CThreadImpl
@@ -126,8 +126,8 @@ class CWin32ThreadImpl : public CThreadImpl
 friend DWORD WINAPI ThreadExecProc(void *pArg);
 
 protected:
-    HANDLE m_nHandle;               // Ïß³Ì¾ä±ú
-    int m_nPriority;                // Ïß³ÌÓÅÏÈ¼¶
+    HANDLE m_nHandle;               // çº¿ç¨‹å¥æŸ„
+    int m_nPriority;                // çº¿ç¨‹ä¼˜å…ˆçº§
     
 private:    
     void CheckThreadError(bool bSuccess);
@@ -149,7 +149,7 @@ public:
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CLinuxThreadImpl - LinuxÆ½Ì¨Ïß³ÌÊµÏÖÀà
+// class CLinuxThreadImpl - Linuxå¹³å°çº¿ç¨‹å®ç°ç±»
 
 #ifdef ICL_LINUX
 class CLinuxThreadImpl : public CThreadImpl
@@ -157,8 +157,8 @@ class CLinuxThreadImpl : public CThreadImpl
 friend void* ThreadExecProc(void *pArg);
 
 protected:
-    int m_nPolicy;                  // Ïß³Ìµ÷¶È²ßÂÔ (THREAD_POLICY_XXX)
-    int m_nPriority;                // Ïß³ÌÓÅÏÈ¼¶ (0..99)
+    int m_nPolicy;                  // çº¿ç¨‹è°ƒåº¦ç­–ç•¥ (THREAD_POLICY_XXX)
+    int m_nPriority;                // çº¿ç¨‹ä¼˜å…ˆçº§ (0..99)
 
 private:    
     void CheckThreadError(int nErrorCode);
@@ -181,7 +181,7 @@ public:
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CThread - Ïß³ÌÀà
+// class CThread - çº¿ç¨‹ç±»
 
 class CThread
 {
@@ -196,42 +196,42 @@ private:
 #endif
 
 protected:
-    // Ïß³ÌµÄÖ´ĞĞº¯Êı£¬×ÓÀà±ØĞëÖØĞ´¡£
+    // çº¿ç¨‹çš„æ‰§è¡Œå‡½æ•°ï¼Œå­ç±»å¿…é¡»é‡å†™ã€‚
     virtual void Execute() {}
 
-    // Ö´ĞĞ Terminate() Ç°µÄ¸½¼Ó²Ù×÷¡£
-    // ×¢: ÓÉÓÚ Terminate() ÊôÓÚ×ÔÔ¸ÍË³ö»úÖÆ£¬ÎªÁËÄÜÈÃÏß³ÌÄÜ¾¡¿ìÍË³ö£¬³ıÁË
-    // m_bTerminated ±êÖ¾±»ÉèÎª true Ö®Íâ£¬ÓĞÊ±»¹Ó¦µ±²¹³äÒ»Ğ©¸½¼ÓµÄ²Ù×÷ÒÔ
-    // ±ãÄÜÈÃÏß³Ì¾¡¿ì´Ó×èÈû²Ù×÷ÖĞ½âÍÑ³öÀ´¡£
+    // æ‰§è¡Œ Terminate() å‰çš„é™„åŠ æ“ä½œã€‚
+    // æ³¨: ç”±äº Terminate() å±äºè‡ªæ„¿é€€å‡ºæœºåˆ¶ï¼Œä¸ºäº†èƒ½è®©çº¿ç¨‹èƒ½å°½å¿«é€€å‡ºï¼Œé™¤äº†
+    // m_bTerminated æ ‡å¿—è¢«è®¾ä¸º true ä¹‹å¤–ï¼Œæœ‰æ—¶è¿˜åº”å½“è¡¥å……ä¸€äº›é™„åŠ çš„æ“ä½œä»¥
+    // ä¾¿èƒ½è®©çº¿ç¨‹å°½å¿«ä»é˜»å¡æ“ä½œä¸­è§£è„±å‡ºæ¥ã€‚
     virtual void BeforeTerminate() {}
 
-    // Ö´ĞĞ Kill() Ç°µÄ¸½¼Ó²Ù×÷¡£
-    // ×¢: Ïß³Ì±»É±ËÀºó£¬ÓÃ»§Ëù¹ÜÀíµÄÄ³Ğ©ÖØÒª×ÊÔ´¿ÉÄÜÎ´ÄÜµÃµ½ÊÍ·Å£¬±ÈÈçËø×ÊÔ´
-    // (»¹Î´À´µÃ¼°½âËø±ã±»É±ÁË)£¬ËùÒÔÖØÒª×ÊÔ´µÄÊÍ·Å¹¤×÷±ØĞëÔÚ BeforeKill ÖĞ½øĞĞ¡£
+    // æ‰§è¡Œ Kill() å‰çš„é™„åŠ æ“ä½œã€‚
+    // æ³¨: çº¿ç¨‹è¢«æ€æ­»åï¼Œç”¨æˆ·æ‰€ç®¡ç†çš„æŸäº›é‡è¦èµ„æºå¯èƒ½æœªèƒ½å¾—åˆ°é‡Šæ”¾ï¼Œæ¯”å¦‚é”èµ„æº
+    // (è¿˜æœªæ¥å¾—åŠè§£é”ä¾¿è¢«æ€äº†)ï¼Œæ‰€ä»¥é‡è¦èµ„æºçš„é‡Šæ”¾å·¥ä½œå¿…é¡»åœ¨ BeforeKill ä¸­è¿›è¡Œã€‚
     virtual void BeforeKill() {}
 public:
     CThread() : m_ThreadImpl(this) {}
     virtual ~CThread() {}
 
-    // ´´½¨²¢Ö´ĞĞÏß³Ì¡£
-    // ×¢: ´Ë³ÉÔ±·½·¨ÔÚ¶ÔÏóÉùÃ÷ÖÜÆÚÖĞÖ»¿Éµ÷ÓÃÒ»´Î¡£
+    // åˆ›å»ºå¹¶æ‰§è¡Œçº¿ç¨‹ã€‚
+    // æ³¨: æ­¤æˆå‘˜æ–¹æ³•åœ¨å¯¹è±¡å£°æ˜å‘¨æœŸä¸­åªå¯è°ƒç”¨ä¸€æ¬¡ã€‚
     void Run() { m_ThreadImpl.Run(); }
 
-    // Í¨ÖªÏß³ÌÍË³ö (×ÔÔ¸ÍË³ö»úÖÆ)
-    // ×¢: ÈôÏß³ÌÓÉÓÚÄ³Ğ©×èÈûÊ½²Ù×÷³Ù³Ù²»ÍË³ö£¬¿Éµ÷ÓÃ Kill() Ç¿ĞĞÍË³ö¡£
+    // é€šçŸ¥çº¿ç¨‹é€€å‡º (è‡ªæ„¿é€€å‡ºæœºåˆ¶)
+    // æ³¨: è‹¥çº¿ç¨‹ç”±äºæŸäº›é˜»å¡å¼æ“ä½œè¿Ÿè¿Ÿä¸é€€å‡ºï¼Œå¯è°ƒç”¨ Kill() å¼ºè¡Œé€€å‡ºã€‚
     void Terminate() { m_ThreadImpl.Terminate(); }
 
-    // Ç¿ĞĞÉ±ËÀÏß³Ì (Ç¿ĞĞÍË³ö»úÖÆ)
+    // å¼ºè¡Œæ€æ­»çº¿ç¨‹ (å¼ºè¡Œé€€å‡ºæœºåˆ¶)
     void Kill() { m_ThreadImpl.Kill(); }
 
-    // µÈ´ıÏß³ÌÍË³ö
+    // ç­‰å¾…çº¿ç¨‹é€€å‡º
     int WaitFor() { return m_ThreadImpl.WaitFor(); }
 
-    // ½øÈëË¯Ãß×´Ì¬ (Ë¯Ãß¹ı³ÌÖĞ»á¼ì²â m_bTerminated µÄ×´Ì¬)
-    // ×¢: ´Ëº¯Êı±ØĞëÓÉÏß³Ì×Ô¼ºµ÷ÓÃ·½¿ÉÉúĞ§¡£
+    // è¿›å…¥ç¡çœ çŠ¶æ€ (ç¡çœ è¿‡ç¨‹ä¸­ä¼šæ£€æµ‹ m_bTerminated çš„çŠ¶æ€)
+    // æ³¨: æ­¤å‡½æ•°å¿…é¡»ç”±çº¿ç¨‹è‡ªå·±è°ƒç”¨æ–¹å¯ç”Ÿæ•ˆã€‚
     void Sleep(double fSeconds) { m_ThreadImpl.Sleep(fSeconds); }
 
-    // ÊôĞÔ (getter)
+    // å±æ€§ (getter)
     int GetThreadId() const { return m_ThreadImpl.GetThreadId(); }
     int GetTerminated() const { return m_ThreadImpl.GetTerminated(); }
     int GetReturnValue() const { return m_ThreadImpl.GetReturnValue(); }
@@ -245,7 +245,7 @@ public:
     int GetPolicy() const { return m_ThreadImpl.GetPolicy(); }
     int GetPriority() const { return m_ThreadImpl.GetPriority(); }
 #endif
-    // ÊôĞÔ (setter)
+    // å±æ€§ (setter)
     void SetTerminated(bool bValue) { m_ThreadImpl.SetTerminated(bValue); }
     void SetReturnValue(int nValue) { m_ThreadImpl.SetReturnValue(nValue); }
     void SetFreeOnTerminate(bool bValue) { m_ThreadImpl.SetFreeOnTerminate(bValue); }

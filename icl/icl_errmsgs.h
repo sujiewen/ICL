@@ -1,16 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Iris Cross-Platform Library (ICL)
 //
-// ÎÄ¼şÃû³Æ: icl_errmsgs.h
-// ¹¦ÄÜÃèÊö: ICL´íÎóĞÅÏ¢¶¨Òå
-// ×îºóĞŞ¸Ä: 2006-01-09
+// æ–‡ä»¶åç§°: icl_errmsgs.h
+// åŠŸèƒ½æè¿°: ICLé”™è¯¯ä¿¡æ¯å®šä¹‰
+// æœ€åä¿®æ”¹: 2006-01-09
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef _ICL_ERRMSGS_H_
 #define _ICL_ERRMSGS_H_
 
 ///////////////////////////////////////////////////////////////////////////////
-// ´íÎóĞÅÏ¢ (Iris Error Message)
+// é”™è¯¯ä¿¡æ¯ (Iris Error Message)
 
 const char* const IEM_OUT_OF_MEMORY               = "out of memory";
 const char* const IEM_INVALID_DATETIME_STR        = "invalid datetime string";

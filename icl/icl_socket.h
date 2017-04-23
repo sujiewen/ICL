@@ -51,7 +51,7 @@ namespace icl
 {
 
 ///////////////////////////////////////////////////////////////////////////////
-// ÌáÇ°ÉùÃ÷
+// æå‰å£°æ˜
 
 class CTcpServer;
 class CListenerThread;
@@ -60,7 +60,7 @@ class CUdpListenerThreadPool;
 class CTcpListenerThread;
 
 ///////////////////////////////////////////////////////////////////////////////
-// ³£Á¿¶¨Òå
+// å¸¸é‡å®šä¹‰
 
 #ifdef ICL_WIN32
 const int IS_SD_RECV            = 0;
@@ -155,7 +155,7 @@ const int IS_ENOTEMPTY          = ENOTEMPTY;
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
-// ´íÎóĞÅÏ¢ (Iris Socket Error Message)
+// é”™è¯¯ä¿¡æ¯ (Iris Socket Error Message)
 
 const char* const ISEM_ERROR             = "Socket Error #%d: %s";
 const char* const ISEM_EINTR             = "Interrupted system call.";
@@ -202,7 +202,7 @@ const char* const ISEM_TCPSENDTIMEOUT    = "TCP send timeout";
 const char* const ISEM_TCPRECVTIMEOUT    = "TCP recv timeout";
 
 ///////////////////////////////////////////////////////////////////////////////
-// ÀàĞÍ¶¨Òå
+// ç±»å‹å®šä¹‰
 
 #ifdef ICL_WIN32
 typedef int socklen_t;
@@ -210,23 +210,23 @@ typedef int socklen_t;
 
 typedef struct sockaddr_in SockAddr;
 
-// ÍøÂçĞ­ÒéÀàĞÍ(UDP|TCP)
+// ç½‘ç»œåè®®ç±»å‹(UDP|TCP)
 enum NetProtoType {
     NPT_UDP,        // UDP
     NPT_TCP         // TCP
 };
 
-// ÍøÂçĞ­ÒéÀàĞÍ(TCP|UTP)
+// ç½‘ç»œåè®®ç±»å‹(TCP|UTP)
 enum DtpProtoType {
     DPT_TCP,        // TCP
     DPT_UTP         // UTP (UDP Transfer Protocol)
 };
 
-// PeerµØÖ·ĞÅÏ¢
+// Peeråœ°å€ä¿¡æ¯
 struct CPeerAddress
 {
-    uint nIp;       // IP (Ö÷»ú×Ö½ÚË³Ğò)
-    int nPort;      // ¶Ë¿Ú
+    uint nIp;       // IP (ä¸»æœºå­—èŠ‚é¡ºåº)
+    int nPort;      // ç«¯å£
 
     CPeerAddress() : nIp(0), nPort(0) {}
     CPeerAddress(uint _nIp, int _nPort)
@@ -236,20 +236,20 @@ struct CPeerAddress
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// ÔÓÏîº¯Êı
+// æ‚é¡¹å‡½æ•°
 
 
-// ÍøÂç³õÊ¼»¯/½áÊø»¯
+// ç½‘ç»œåˆå§‹åŒ–/ç»“æŸåŒ–
 bool NetworkInitialize();
 void NetworkFinalize();
 
-// ½â¾ö¿çÆ½Ì¨ÎÊÌâµÄº¯Êı
+// è§£å†³è·¨å¹³å°é—®é¢˜çš„å‡½æ•°
 int IclGetLastError();
 string IclGetErrorMsg(int nError);
 string IclGetLastErrMsg();
 void IclCloseSocket(int nHandle);
 
-// ÔÓÏîº¯Êı
+// æ‚é¡¹å‡½æ•°
 string IpToString(int nIp);
 int StringToIp(const string& strString);
 void GetSocketAddr(SockAddr& SockAddr, uint nIpHostValue, int nPort);
@@ -258,9 +258,9 @@ void GetLocalIpList(StringArray& IpList);
 string GetLocalIp();
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CSocketException - ÍøÂçÒì³£Àà
+// class CSocketException - ç½‘ç»œå¼‚å¸¸ç±»
 //
-// ×¢: ËùÓĞµÄÍøÂç²Ù×÷Òì³£¶¼Ê¹ÓÃ¸ÃÀà»òËüµÄÅÉÉúÀà¡£
+// æ³¨: æ‰€æœ‰çš„ç½‘ç»œæ“ä½œå¼‚å¸¸éƒ½ä½¿ç”¨è¯¥ç±»æˆ–å®ƒçš„æ´¾ç”Ÿç±»ã€‚
 
 class CSocketException : public CException
 {
@@ -273,19 +273,19 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CSocket - Ì×½Ó×ÖÀà
+// class CSocket - å¥—æ¥å­—ç±»
 
 class CSocket
 {
 friend class CTcpServer;
 
 protected:
-    bool m_bActive;     // Ì×½Ó×ÖÊÇ·ñ×¼±¸¾ÍĞ÷
-    int m_nHandle;      // Ì×½Ó×Ö¾ä±ú
-    int m_nDomain;      // Ì×½Ó×ÖµÄĞ­Òé¼Ò×å (PF_UNIX, PF_INET, PF_INET6, PF_IPX, ...)
-    int m_nType;        // Ì×½Ó×ÖÀàĞÍ£¬±ØĞëÖ¸¶¨ (SOCK_STREAM, SOCK_DGRAM, SOCK_RAW, SOCK_RDM, SOCK_SEQPACKET)
-    int m_nProtocol;    // Ì×½Ó×ÖËùÓÃĞ­Òé£¬¿ÉÎª0 (IPPROTO_IP, IPPROTO_UDP, IPPROTO_TCP, ...)
-    bool m_bBlockMode;  // ÊÇ·ñÎª×èÈûÄ£Ê½ (È±Ê¡Îª×èÈûÄ£Ê½)
+    bool m_bActive;     // å¥—æ¥å­—æ˜¯å¦å‡†å¤‡å°±ç»ª
+    int m_nHandle;      // å¥—æ¥å­—å¥æŸ„
+    int m_nDomain;      // å¥—æ¥å­—çš„åè®®å®¶æ— (PF_UNIX, PF_INET, PF_INET6, PF_IPX, ...)
+    int m_nType;        // å¥—æ¥å­—ç±»å‹ï¼Œå¿…é¡»æŒ‡å®š (SOCK_STREAM, SOCK_DGRAM, SOCK_RAW, SOCK_RDM, SOCK_SEQPACKET)
+    int m_nProtocol;    // å¥—æ¥å­—æ‰€ç”¨åè®®ï¼Œå¯ä¸º0 (IPPROTO_IP, IPPROTO_UDP, IPPROTO_TCP, ...)
+    bool m_bBlockMode;  // æ˜¯å¦ä¸ºé˜»å¡æ¨¡å¼ (ç¼ºçœä¸ºé˜»å¡æ¨¡å¼)
 
 private:
     void DoSetBlockMode(int nHandle, bool bValue);
@@ -314,7 +314,7 @@ public:
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CTcpSocket - TCP Ì×½Ó×ÖÀà
+// class CTcpSocket - TCP å¥—æ¥å­—ç±»
 
 class CTcpSocket : public CSocket
 {
@@ -328,7 +328,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CDtpConnection - DTP Connection Àà (Data Transfer Protocol, including TCP and UTP)
+// class CDtpConnection - DTP Connection ç±» (Data Transfer Protocol, including TCP and UTP)
 
 class CDtpConnection
 {
@@ -340,21 +340,21 @@ public:
 
     virtual bool GetConnected() = 0;
     virtual void Disconnect() = 0;
-    // Ñ­»··Ç×èÈû·¢ËÍ/½ÓÊÕ
+    // å¾ªç¯éé˜»å¡å‘é€/æ¥æ”¶
     virtual void SendBuffer(void *pBuffer, int nSize, int nTimeoutSecs = 0) = 0;
     virtual void RecvBuffer(void *pBuffer, int nSize, int nTimeoutSecs = 0) = 0;
-    // ·Ç×èÈû·¢ËÍ/½ÓÊÕ
+    // éé˜»å¡å‘é€/æ¥æ”¶
     virtual int WriteBuffer(void *pBuffer, int nSize) = 0;
     virtual int ReadBuffer(void *pBuffer, int nSize) = 0;
 
-    // ÆäËü·¢ËÍ/½ÓÊÕ·½·¨
+    // å…¶å®ƒå‘é€/æ¥æ”¶æ–¹æ³•
     virtual string RecvString(char chTerminalChar = '\0', int nTimeoutSecs = 0);
 
     CPeerAddress GetRemoteAddr() { return m_nRemoteAddr; }
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CTcpConnection - TCP Connection Àà
+// class CTcpConnection - TCP Connection ç±»
 
 class CTcpConnection : public CDtpConnection
 {
@@ -372,10 +372,10 @@ public:
     virtual bool GetConnected();
     virtual void Disconnect();
 
-    // Ñ­»··Ç×èÈû·¢ËÍ/½ÓÊÕ
+    // å¾ªç¯éé˜»å¡å‘é€/æ¥æ”¶
     virtual void SendBuffer(void *pBuffer, int nSize, int nTimeoutSecs = 0);
     virtual void RecvBuffer(void *pBuffer, int nSize, int nTimeoutSecs = 0);
-    // ·Ç×èÈû·¢ËÍ/½ÓÊÕ
+    // éé˜»å¡å‘é€/æ¥æ”¶
     virtual int WriteBuffer(void *pBuffer, int nSize);
     virtual int ReadBuffer(void *pBuffer, int nSize);
 	int WriteSjwBuffer(void *pBuffer, int nSize);
@@ -385,33 +385,33 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CTcpClient - TCP Client Àà
+// class CTcpClient - TCP Client ç±»
 
 class CTcpClient : public CTcpConnection
 {
 public:
-    // ×èÈûÊ½Á¬½Ó
+    // é˜»å¡å¼è¿æ¥
     void Connect(const string& strIp, int nPort);
-    // ·Ç×èÈûÊ½Á¬½Ó
+    // éé˜»å¡å¼è¿æ¥
     bool ConnectNonBlock(const string& strIp, int nPort);
-    // ·Ç×èÈûÊ½Á¬½ÓÊÇ·ñÍê³É
+    // éé˜»å¡å¼è¿æ¥æ˜¯å¦å®Œæˆ
     bool IsConnect();
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CTcpServer - TCP Server Àà
+// class CTcpServer - TCP Server ç±»
 
 class CTcpServer
 {
 public:
-    enum { LISTEN_QUEUE_SIZE = 15 };   // TCP¼àÌı¶ÓÁĞ³¤¶È
+    enum { LISTEN_QUEUE_SIZE = 15 };   // TCPç›‘å¬é˜Ÿåˆ—é•¿åº¦
 
 private:
     CTcpSocket m_Socket;
     int m_nLocalPort;
     CTcpListenerThread *m_pListenerThread;
 public:
-    // OnConnectEvent µÄÊÂ¼ş²ÎÊıÀàĞÍ
+    // OnConnectEvent çš„äº‹ä»¶å‚æ•°ç±»å‹
     struct CConnectEventParam
     {
         CTcpConnection *pConnection;
@@ -435,13 +435,13 @@ public:
     void SetActive(bool bValue);
     void SetLocalPort(int nValue);
 
-    // ÊÂ¼şº¯Êı: ÊÕµ½Á¬½Ó (×¢: pConnection ÊÇ¶Ñ¶ÔÏó£¬ĞèÊ¹ÓÃÕßÊÍ·Å)
+    // äº‹ä»¶å‡½æ•°: æ”¶åˆ°è¿æ¥ (æ³¨: pConnection æ˜¯å †å¯¹è±¡ï¼Œéœ€ä½¿ç”¨è€…é‡Šæ”¾)
     virtual void OnConnect(CTcpConnection *pConnection)
     { OnConnectEvent.Invoke(*this, CConnectEventParam(pConnection)); }
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CListenerThread - ¼àÌıÏß³ÌÀà
+// class CListenerThread - ç›‘å¬çº¿ç¨‹ç±»
 
 class CListenerThread : public CThread
 {
@@ -462,7 +462,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CTcpListenerThread - TCP·şÎñÆ÷¼àÌıÏß³ÌÀà
+// class CTcpListenerThread - TCPæœåŠ¡å™¨ç›‘å¬çº¿ç¨‹ç±»
 
 class CTcpListenerThread : public CListenerThread
 {
@@ -475,7 +475,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CDtpConnectionWarp - ·â×°DTPÁ¬½Ó£¬·½±ã¶ÁĞ´Êı¾İ
+// class CDtpConnectionWarp - å°è£…DTPè¿æ¥ï¼Œæ–¹ä¾¿è¯»å†™æ•°æ®
 
 class CDtpConnectionWarp
 {
@@ -493,25 +493,25 @@ public:
     virtual ~CDtpConnectionWarp() {};
 
     ///////////////////////////////////////////////////////////////////////////
-    // ÉèÖÃ²ÎÊı¡£Èç¹û²»ĞèÒª¶ÁÈ¡»òÕßĞ´³öÖ»ĞèÒª½«ÏàÓ¦µÄ³¤¶ÈÉèÖÃÎª0¡£
+    // è®¾ç½®å‚æ•°ã€‚å¦‚æœä¸éœ€è¦è¯»å–æˆ–è€…å†™å‡ºåªéœ€è¦å°†ç›¸åº”çš„é•¿åº¦è®¾ç½®ä¸º0ã€‚
     void SetParam(CDtpConnection* pDtpConnection,
         char* pReadBuffer, int ReadLength,
         char* pWriteBuffer, int WriteLength);
 
     ///////////////////////////////////////////////////////////////////////////
-    // ½ÓÊÜÊı¾İ£¬Èç¹û½ÓÊÕµ½Ô¤ÆÚµÄÊı¾İÔò·µ»Øtrue
+    // æ¥å—æ•°æ®ï¼Œå¦‚æœæ¥æ”¶åˆ°é¢„æœŸçš„æ•°æ®åˆ™è¿”å›true
     bool IsDoneReadBuffer();
 
     ///////////////////////////////////////////////////////////////////////////
-    // ·¢ËÍÊı¾İ£¬Èç¹ûÊı¾İ·¢ËÍÍê±Ï·µ»Øtrue
+    // å‘é€æ•°æ®ï¼Œå¦‚æœæ•°æ®å‘é€å®Œæ¯•è¿”å›true
     bool IsDoneWriteBuffer();
 
     ///////////////////////////////////////////////////////////////////////////
-    // ÖØĞÂÉèÖÃÒª¶ÁÈ¡µÄ×Ö½ÚÊı£¨¿ÉÄÜÒÑ¾­¶ÁÈ¡ÁËÒ»Ğ©Êı¾İ£©
+    // é‡æ–°è®¾ç½®è¦è¯»å–çš„å­—èŠ‚æ•°ï¼ˆå¯èƒ½å·²ç»è¯»å–äº†ä¸€äº›æ•°æ®ï¼‰
     void AdjustReadLength(int ReadLength);
 
     ///////////////////////////////////////////////////////////////////////////
-    // ÖØĞÂÉèÖÃÒªĞ´³öµÄ×Ö½ÚÊı£¨¿ÉÄÜÒÑ¾­Ğ´³öÁËÒ»Ğ©Êı¾İ£©
+    // é‡æ–°è®¾ç½®è¦å†™å‡ºçš„å­—èŠ‚æ•°ï¼ˆå¯èƒ½å·²ç»å†™å‡ºäº†ä¸€äº›æ•°æ®ï¼‰
     void AdjustWriteLength(int WriteLength);
 
     CDtpConnection* GetDtpConnection() { return m_pDtpConnection; };

@@ -14,19 +14,19 @@
 using namespace icl;
 
 ///////////////////////////////////////////////////////////////////////////////
-// ÌáÇ°ÉùÃ÷
+// æå‰å£°æ˜
 
 class CHandlerWorkerThread;
 class CThreadHandler;
 
 ///////////////////////////////////////////////////////////////////////////////
-// ³£Á¿¶¨Òå
+// å¸¸é‡å®šä¹‰
 
-// ¹¤×÷ÕßÏß³ÌµÄÄ¬ÈÏĞİÏ¢Ê±¼ä(ºÁÃë)
+// å·¥ä½œè€…çº¿ç¨‹çš„é»˜è®¤ä¼‘æ¯æ—¶é—´(æ¯«ç§’)
 const int DEF_THREAD_SHEEP_MSECS = 150;
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CHandlerWorkerThread - ÓÃÓÚ CThreadHandler µÄ¹¤×÷ÕßÏß³Ì
+// class CHandlerWorkerThread - ç”¨äº CThreadHandler çš„å·¥ä½œè€…çº¿ç¨‹
 
 class CHandlerWorkerThread : public CThread
 {
@@ -42,30 +42,30 @@ public:
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// class CThreadHandler - Ïß³Ì´¦ÀíÆ÷
+// class CThreadHandler - çº¿ç¨‹å¤„ç†å™¨
 
 class CThreadHandler
 {
 friend class CHandlerWorkerThread;
 
 private:
-    CHandlerWorkerThread *m_pWorkerThread;  // ¹¤×÷ÕßÏß³Ì
+    CHandlerWorkerThread *m_pWorkerThread;  // å·¥ä½œè€…çº¿ç¨‹
 protected:
-    bool m_bThreadNeedSleep;                // Ïß³ÌÊÇ·ñĞèÒªĞİÏ¢(Ìá¹©¸øHandle()º¯ÊıĞŞ¸Ä)
-    double m_fThreadSleepSeconds;           // Ïß³ÌÃ¿´ÎĞİÏ¢µÄÊ±¼ä(Ãë)
+    bool m_bThreadNeedSleep;                // çº¿ç¨‹æ˜¯å¦éœ€è¦ä¼‘æ¯(æä¾›ç»™Handle()å‡½æ•°ä¿®æ”¹)
+    double m_fThreadSleepSeconds;           // çº¿ç¨‹æ¯æ¬¡ä¼‘æ¯çš„æ—¶é—´(ç§’)
 
 protected:
-    // ´¦ÀíÆ÷¹¤×÷º¯Êı£¬ÓÉÏß³ÌÑ­»·Ö´ĞĞ
-    // ·µ»Ø:
-    //   true  - Ïß³ÌÎŞĞèĞİÏ¢£¬ÂíÉÏÖ´ĞĞÏÂÒ»ÂÖÑ­»·
-    //   false - Ïß³ÌĞèÉÔ×öĞİÏ¢
+    // å¤„ç†å™¨å·¥ä½œå‡½æ•°ï¼Œç”±çº¿ç¨‹å¾ªç¯æ‰§è¡Œ
+    // è¿”å›:
+    //   true  - çº¿ç¨‹æ— éœ€ä¼‘æ¯ï¼Œé©¬ä¸Šæ‰§è¡Œä¸‹ä¸€è½®å¾ªç¯
+    //   false - çº¿ç¨‹éœ€ç¨åšä¼‘æ¯
     virtual void Handle() = 0;
 public:
     CThreadHandler();
 	virtual ~CThreadHandler();
 	HANDLE GegThreadHandle();
 
-    // Æô/Í£¹¤×÷ÕßÏß³Ì
+    // å¯/åœå·¥ä½œè€…çº¿ç¨‹
     void StartWorkerThread();
     void StopWorkerThread();
 };

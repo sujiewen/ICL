@@ -50,12 +50,12 @@ namespace icl
 {
 
 ///////////////////////////////////////////////////////////////////////////////
-// ÌáÇ°ÉùÃ÷
+// æå‰å£°æ˜
 
 class CBuffer;
 
 ///////////////////////////////////////////////////////////////////////////////
-// ³£Á¿¶¨Òå
+// å¸¸é‡å®šä¹‰
 
 #ifdef ICL_WIN32
 const char PATH_DELIM   = '\\';
@@ -65,7 +65,7 @@ const char DRIVER_DELIM = ':';
 const char PATH_DELIM   = '/';
 #endif
 
-// ÎÄ¼şÊôĞÔ
+// æ–‡ä»¶å±æ€§
 const uint FA_READ_ONLY     = 0x00000001;
 const uint FA_HIDDEN        = 0x00000002;
 const uint FA_SYS_FILE      = 0x00000004;
@@ -76,14 +76,14 @@ const uint FA_SYM_LINK      = 0x00000040;    // Linux Only
 const uint FA_ANY_FILE      = 0x0000003F;
 
 ///////////////////////////////////////////////////////////////////////////////
-// ÀàĞÍ¶¨Òå
+// ç±»å‹å®šä¹‰
 
-// ÎÄ¼ş²éÕÒ¼ÇÂ¼
+// æ–‡ä»¶æŸ¥æ‰¾è®°å½•
 struct CFileFindRec
 {
-    int64 nFileSize;         // ÎÄ¼ş´óĞ¡
-    string strFileName;      // ÎÄ¼şÃû(²»º¬Â·¾¶)
-    uint nAttr;              // ÎÄ¼şÊôĞÔ
+    int64 nFileSize;         // æ–‡ä»¶å¤§å°
+    string strFileName;      // æ–‡ä»¶å(ä¸å«è·¯å¾„)
+    uint nAttr;              // æ–‡ä»¶å±æ€§
 };
 
 typedef vector<CFileFindRec> FileFindResult;
@@ -95,7 +95,7 @@ bool IsxDigit(char nCh);
 bool StrIsDigit(const string& strValue);
 
 ///////////////////////////////////////////////////////////////////////////////
-// ÔÓÏîº¯Êı
+// æ‚é¡¹å‡½æ•°
 string ReplaceAll(const string& strSrc,const string& strOldValue,const string& strNewValue);
 string ReplaceAllDistinct(const string& strSrc,const string& strOldValue,const string& strNewValue);
 wstring ReplaceAllDistinct(const wstring& strSrc,const wstring& strOldValue,const wstring& strNewValue);
@@ -106,7 +106,7 @@ char *WChToCh(const wchar_t *pWCh , char *pCh);
 char *WStrToCStr(const wchar_t *pWStr , char *pCStr, size_t nLen);
 
 //-----------------------------------------------------------------------------
-//-- ×Ö·û´®º¯Êı:
+//-- å­—ç¬¦ä¸²å‡½æ•°:
 char *stristr(const char *String, const char *Pattern);
 char *StrIStr( char *pSrc, const char *pDst);
 bool EndSameText(const string& strValue, const string& strKey,bool bFlag=true);
@@ -137,7 +137,7 @@ char* StrNCopy(char *pDest, const char *pSource, int nMaxBytes);
 char* StrNZCopy(char *pDest, const char *pSource, int nDestSize);
 
 //-----------------------------------------------------------------------------
-//-- ÎÄ¼şºÍÄ¿Â¼:
+//-- æ–‡ä»¶å’Œç›®å½•:
 
 bool FileExists(const string& strFileName);
 bool DirectoryExists(const string& strDir);
@@ -152,7 +152,7 @@ string PathWithSlash(const string& strPath);
 string PathWithoutSlash(const string& strPath);
 
 //-----------------------------------------------------------------------------
-//-- ÏµÍ³Ïà¹Ø:
+//-- ç³»ç»Ÿç›¸å…³:
 
 string SysErrorMessage(int nErrorCode);
 void NanoSleep(double fSeconds, bool AllowInterrupt = true);
@@ -161,7 +161,7 @@ uint GetCurTicks();
 uint GetTickDiff(uint nOldTicks, uint nNewTicks);
 
 //-----------------------------------------------------------------------------
-//-- Ëã·¨Ïà¹Ø:
+//-- ç®—æ³•ç›¸å…³:
 
 bool ZlibCompress(CBuffer& Buffer);
 bool ZlibUncompress(CBuffer& Buffer);
@@ -195,7 +195,7 @@ string StrToBase64(const char *pData, int nSize);
 string StrToBase16(const char *pData, int nSize);
 
 //-----------------------------------------------------------------------------
-//-- ÆäËüº¯Êı:
+//-- å…¶å®ƒå‡½æ•°:
 
 void Randomize();
 int GetRandom(int nMin, int nMax);
